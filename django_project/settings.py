@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",  # Приложение для управления сессиями пользователей.
     "django.contrib.messages",  # Приложение для управления сообщениями веб-приложения.
     "django.contrib.staticfiles",  # Приложение для управления статическими файлами, такими как CSS и JavaScript.
-
+    # Third-party
+    "crispy_forms", # new
+    "crispy_bootstrap5", # new
     # Локальные (пользовательские) приложения:
 
     "accounts.apps.AccountsConfig",  # Приложение, связанное с учетными записями и аутентификацией пользователей.
@@ -140,3 +142,6 @@ AUTH_USER_MODEL = "accounts.CustomUser"
 
 LOGIN_REDIRECT_URL = "home"  # new
 LOGOUT_REDIRECT_URL = "home"
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5" # new
+CRISPY_TEMPLATE_PACK = "bootstrap5" # new
