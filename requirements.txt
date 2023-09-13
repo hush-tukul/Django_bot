@@ -1,0 +1,25 @@
+aiogram==3.0.0b9
+environs~=9.0
+asgiref==3.6.0
+
+sqlparse==0.4.2
+redis
+stripe
+betterlogging
+aiogram-dialog==2.0.0b21
+quart==0.18.4
+sqlalchemy>=1.4.47
+psycopg2-binary==2.9.7
+Flask>=2.0.2
+shortuuid>=1.0.11
+pytz==2023.3
+Django==4.2.4
+# # For enabling api:
+# backoff
+# ujson
+# yarl
+
+# # For PostgreSQL sqlalchemy + alembic:
+
+# alembic~=1.0
+# asyncpg
