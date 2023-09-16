@@ -12,6 +12,12 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 
+from environs import Env
+
+env = Env() # new
+env.read_env() # new
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -23,9 +29,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-tx0ag$vl96m1z$@gtkfwun=htoc!p=k17z+gq)b2ud7zgqi6^s"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool("DJANGO_DEBUG") # new
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 
 # Application definition
@@ -37,9 +43,12 @@ INSTALLED_APPS = [
     "django.contrib.sessions",  # Приложение для управления сессиями пользователей.
     "django.contrib.messages",  # Приложение для управления сообщениями веб-приложения.
     "django.contrib.staticfiles",  # Приложение для управления статическими файлами, такими как CSS и JavaScript.
+    "django.contrib.sites", # new
     # Third-party
     "crispy_forms", # new
     "crispy_bootstrap5", # new
+    "allauth", # new
+    "allauth.account", # new
     # Локальные (пользовательские) приложения:
 
     "accounts.apps.AccountsConfig",  # Приложение, связанное с учетными записями и аутентификацией пользователей.
@@ -84,14 +93,8 @@ WSGI_APPLICATION = "django_project.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "postgres",
-        "USER": "postgres",
-        "PASSWORD": "123456",
-        "HOST": "db",  # set in docker-compose.yml
-        "PORT": 5432,  # default postgres port
-    }
+    "default": env.dj_db_url("DATABASE_URL",
+    default="postgres://postgres@db/postgres")
 }
 
 
@@ -145,3 +148,34 @@ LOGOUT_REDIRECT_URL = "home"
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5" # new
 CRISPY_TEMPLATE_PACK = "bootstrap5" # new
+
+# django-allauth config
+SITE_ID = 1 # new
+
+AUTHENTICATION_BACKENDS = (
+"django.contrib.auth.backends.ModelBackend",
+"allauth.account.auth_backends.AuthenticationBackend", # new
+)
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend" # new
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = 'priferiti@gmail.com'
+EMAIL_HOST_PASSWORD = '543286975A@rd'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+
+
+ACCOUNT_SESSION_REMEMBER = True # new
+
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False # new
+
+
+ACCOUNT_USERNAME_REQUIRED = False # new
+ACCOUNT_AUTHENTICATION_METHOD = "email" # new
+ACCOUNT_EMAIL_REQUIRED = True # new
+ACCOUNT_UNIQUE_EMAIL = True # new
+
+SECRET_KEY = env("DJANGO_SECRET_KEY")
+
+DEFAULT_FROM_EMAIL = "admin@djangobookstore.com"

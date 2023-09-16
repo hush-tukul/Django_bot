@@ -2,7 +2,7 @@ aiogram==3.0.0b9
 environs~=9.0
 asgiref==3.6.0
 
-sqlparse==0.4.2
+sqlparse>=0.4.2
 redis
 stripe
 betterlogging
@@ -16,6 +16,11 @@ pytz==2023.3
 Django==4.2.4
 django-crispy-forms==1.14.0
 crispy-bootstrap5==0.6
+django-allauth==0.50.0
+environs[django]==9.5.0
+
+
+
 # # For enabling api:
 # backoff
 # ujson
