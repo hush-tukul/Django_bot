@@ -179,3 +179,6 @@ ACCOUNT_UNIQUE_EMAIL = True # new
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 
 DEFAULT_FROM_EMAIL = "admin@djangobookstore.com"
+
+MEDIA_URL = "/media/" # new
+MEDIA_ROOT = BASE_DIR / "media" # new
