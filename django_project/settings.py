@@ -25,8 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-tx0ag$vl96m1z$@gtkfwun=htoc!p=k17z+gq)b2ud7zgqi6^s"
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DJANGO_DEBUG") # new
@@ -53,6 +52,7 @@ INSTALLED_APPS = [
 
     "accounts.apps.AccountsConfig",  # Приложение, связанное с учетными записями и аутентификацией пользователей.
     "pages.apps.PagesConfig",  # Новое пользовательское приложение для работы с веб-страницами. Добавлено в проекте.
+    "books.apps.BooksConfig", # new
 ]
 
 
@@ -158,10 +158,10 @@ AUTHENTICATION_BACKENDS = (
 )
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend" # new
-EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST = "smtp.poczta.onet.pl"
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-EMAIL_PORT = 587
+EMAIL_PORT = 465
 EMAIL_USE_TLS = True
 
 
